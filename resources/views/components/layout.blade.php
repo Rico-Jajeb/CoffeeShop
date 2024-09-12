@@ -18,7 +18,7 @@
     <body class="antialiased ">
 
         <nav class="flex flex-row ">
-            <section class="bg-green-300 pl-6 pr-6 pt-1 pb-1 basis-0 sm:basis-1/4 flex">
+            <section class="bg-[#0B0E14] pl-6 pr-6 pt-1 pb-1 basis-0 sm:basis-1/4 flex">
                 <div class="bg-[#ED500A] p-2 ml-10">
                     <img class="h-16 w-16 " src="{{asset('images/1726140619.jpg')}}" alt="System Logo">
                 </div>
