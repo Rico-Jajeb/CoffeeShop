@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AdminPanelController extends Controller
+class AdminPanelControllers extends Controller
 {
     public function products_page()
     {

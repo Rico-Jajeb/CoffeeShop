@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\AdminPanelController;
+use App\Http\Controllers\AdminPanelControllers;
+use App\Http\Controllers\AdminPanel\products\ProductsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,11 @@ Route::get('/Blogs',[MainController::class, 'blogs_page'] )->name('blogs_page');
 Route::get('/Contact_us',[MainController::class, 'contact_us_page'] )->name('contact_us_page');
 Route::get('/Services',[MainController::class, 'services_page'] )->name('services_page');
 
-Route::get('/Products',[AdminPanelController::class, 'products_page'] )->name('products_page');
+Route::get('/Products',[AdminPanelControllers::class, 'products_page'] )->name('products_page');
+
+//THIS IS FOR THE UPLOADING OF IMAGES
+Route::get('/upload', [ProductsController::class, 'showUploadForm']);
+Route::post('/upload', [ProductsController::class, 'uploadImage'])->name('image.upload');
+
 
 require __DIR__.'/auth.php';
