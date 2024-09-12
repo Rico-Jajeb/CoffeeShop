@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AdminPanelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,5 +29,7 @@ Route::get('/Home',[MainController::class, 'main_page'] )->name('main_page');
 Route::get('/Blogs',[MainController::class, 'blogs_page'] )->name('blogs_page');
 Route::get('/Contact_us',[MainController::class, 'contact_us_page'] )->name('contact_us_page');
 Route::get('/Services',[MainController::class, 'services_page'] )->name('services_page');
+
+Route::get('/Products',[AdminPanelController::class, 'products_page'] )->name('products_page');
 
 require __DIR__.'/auth.php';
