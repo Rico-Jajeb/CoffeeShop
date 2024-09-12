@@ -1,7 +1,7 @@
 <x-layout>
 
     {{-- Page Title --}}
-    <x-slot:title> Contact Us Page </x-slot:title>
+    <x-slot:title> Contact Us </x-slot:title>
     {{-- Text color of navigation --}}
     <x-slot:txtColor></x-slot:txtColor> 
     <x-slot:txtColor2></x-slot:txtColor2> 
