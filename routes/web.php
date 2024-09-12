@@ -14,7 +14,7 @@ use App\Http\Controllers\MainController;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'main_page');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -24,6 +24,9 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::get('/Home_page',[MainController::class, 'main_page'] )->name('main_page');
+Route::get('/Home',[MainController::class, 'main_page'] )->name('main_page');
+Route::get('/Blogs',[MainController::class, 'blogs_page'] )->name('blogs_page');
+Route::get('/Contact_us',[MainController::class, 'contact_us_page'] )->name('contact_us_page');
+Route::get('/Services',[MainController::class, 'services_page'] )->name('services_page');
 
 require __DIR__.'/auth.php';
