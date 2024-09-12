@@ -1,20 +1,44 @@
 <x-app-layout>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+                <div class="p-6 text-gray-900 flex justify-between">
                     {{ __("You're in items!") }}
-                </div>
-                <div class="">
                     <!-- Modal toggle -->
                     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                         add Products
-                    </button>
-                </div>  
+                    </button>                    
+                </div>
+                <div class=" flex gap-2">
+                
+                    @foreach ($images as $image)
+                        <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            <a href="#">
+                                <img class="p-8 rounded-t-lg h-64 w-full" src="{{ asset('images/' . $image->product_image) }}" alt="{{ $image->product_name }}" />
+                            </a>
+                            <div class="px-5 pb-5">
+                                <a href="#">
+                                    <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ $image->product_name }}</h5>
+                                </a>
+                                <div class="flex items-center mt-2.5 mb-5">
+                                    <h6 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ $image->product_description }}</h6>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-3xl font-bold text-gray-900 dark:text-white">${{ $image->product_price }}</span>
+                                    <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div> 
             </div>
           
         </div>
     </div>
+
+
 
 
 
