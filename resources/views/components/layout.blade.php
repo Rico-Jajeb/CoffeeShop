@@ -15,29 +15,29 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased">
+    <body class="antialiased ">
 
         <nav class="flex flex-row">
-            <section class="bg-green-300 p-6 basis-0 sm:basis-1/4">
-                <div class="">
-                    <h1>Logo</h1>
+            <section class="bg-green-300 pl-6 pr-6 pt-1 pb-1 basis-0 sm:basis-1/4 flex">
+                <div class="bg-[#ED500A] p-2 ml-10">
+                    <img class="h-12 w-12 " src="{{asset('images/1726140619.jpg')}}" alt="System Logo">
                 </div>
             </section>
     
-            <section class="bg-yellow-300 p-6 basis-0 sm:basis-1/2">
+            <section class="bg-[#0B0E14] p-6 basis-0 sm:basis-1/2">
                 <div class="">
-                    <ul class="flex gap-3">
+                    <ul class="flex gap-6 sm:gap-16 text-base font-semibold text-[#F8E6DE] dark:text-white">
                         <li>
-                            <a href="{{ route('main_page') }}">Home</a>
+                            <a href="{{ route('main_page') }}" class="{{ $txtColor }}" >Home</a>
                         </li>
                         <li>
-                            <a href="{{ route('blogs_page') }}">Blog</a>
+                            <a href="{{ route('blogs_page') }}" class="{{ $txtColor2 }}" >Blog</a>
                         </li>
                         <li>
-                            <a href="{{ route('contact_us_page') }}">Contact Us</a>
+                            <a href="{{ route('contact_us_page') }}"  class="{{ $txtColor3 }}">Contact Us</a>
                         </li>
                         <li>
-                            <a href="{{ route('services_page') }}">Services</a>
+                            <a href="{{ route('services_page') }}"  class="{{ $txtColor4 }}">Services</a>
                         </li>
                     </ul>
                 </div>
