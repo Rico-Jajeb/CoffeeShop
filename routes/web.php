@@ -17,7 +17,8 @@ use App\Http\Controllers\AdminPanel\products\ProductsController;
 |
 */
 
-Route::view('/', 'main_page');
+// Route::view('/', 'main_page');
+Route::get('/',[MainController::class, 'main_page'] )->name('main_page');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
