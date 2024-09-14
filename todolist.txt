@@ -1,0 +1,52 @@
+Legend-( [/] for finish, [0] for in progress  )
+
+
+
+Home Page
+    []---- Design and implement homepage layout
+
+User Authentication Pages
+    []---- Create Registration Page
+    []---- Create Login Page
+    []---- Create Password Recovery
+
+User Profile Page
+    []---- Create user page with edit functionality
+    []---- Display user information and order History
+
+Admin Dashboard
+    []---- Create admin login page
+    []---- Create admin dashboard
+    []---- Create admin navigation
+    []---- Create admin dashboard overview
+    []---- Create inventory management page : Track and update inventory levels
+    []---- Create sales tracking page: view and filter sales report
+
+Product Pages
+    []---- create product management page: Add, edit, delete products
+    []---- create product listing page: display all products with search filter options
+    []---- create product detail page: Show detailed information for individual products
+
+Shopping carts
+    []---- create shopping cart page: View items in the cart, update quantities, and remove items
+    []---- implement checkout page: enter shipping details, select payment method, and place order
+
+Blog 
+    []---- Create Blog listing page: show list of blog post with categories and tags.
+    []---- Create blog post page: display individual blog post content 
+    []---- Develop blog post creation and editing page: for admin to manage blog content 
+
+Contact us page
+    []---- Create contact form: form fields for name, email, message  and submit button.
+    []---- add contact information: display address, phone number, and email of the store
+
+Services page
+    []---- Create services page: List and describe services offered by the coffee shop.
+
+Search and Filtering
+    []---- create product search functionality: implement search bar and result page.
+    []---- add product filtering options: By category, price, popularity, etc.
+
+Miscellaneous Pages
+    []---- Create about us page: provide information about the coffee shop.
+    []---- Create FAQ Page(optional): Answer common questions. (best if you can add chat bot).
