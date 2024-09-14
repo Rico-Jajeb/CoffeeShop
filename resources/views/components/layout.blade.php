@@ -10,15 +10,15 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         
-        {{-- <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-        <script src="https://cdn.tailwindcss.com"></script> --}}
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
     </head>
-    <body class="antialiased ">
+    <body class="antialiased bg-[#0B0E14]">
 
-        <nav class="flex flex-row ">
+        <nav class="max-w-screen-2xl mx-auto flex flex-row ">
             <section class="bg-[#0B0E14] pl-6 pr-6 pt-1 pb-1 basis-0 sm:basis-1/4 flex">
                 <div class="bg-[#ED500A] p-2 ml-10">
                     <img class="h-16 w-16 " src="{{asset('images/1726140619.jpg')}}" alt="System Logo">
@@ -54,11 +54,11 @@
     
     
     
-        <main class="bg-red-200">
+        <main class="">
             {{ $slot }}        
         </main>
 
-        {{-- <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>     --}}
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>    
 
     </body>
 </html>
