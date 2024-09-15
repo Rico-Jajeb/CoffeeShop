@@ -29,16 +29,16 @@
                 <div class="">
                     <ul class="flex gap-6 sm:gap-16 text-base font-semibold text-[#F8E6DE] dark:text-white">
                         <li>
-                            <a href="{{ route('main_page') }}" class="{{ $txtColor }}" >Home</a>
+                            <a href="{{ route('main_page') }}" class="{{ $txtColor }}" wire:navigate wire:navigate.hover >Home</a>
                         </li>
                         <li>
-                            <a href="{{ route('blogs_page') }}" class="{{ $txtColor2 }}" >Blog</a>
+                            <a href="{{ route('blogs_page') }}" class="{{ $txtColor2 }}" wire:navigate wire:navigate.hover >Blog</a>
                         </li>
                         <li>
-                            <a href="{{ route('contact_us_page') }}"  class="{{ $txtColor3 }}">Contact Us</a>
+                            <a href="{{ route('contact_us_page') }}"  class="{{ $txtColor3 }}" wire:navigate wire:navigate.hover>Contact Us</a>
                         </li>
                         <li>
-                            <a href="{{ route('services_page') }}"  class="{{ $txtColor4 }}">Services</a>
+                            <a href="{{ route('services_page') }}"  class="{{ $txtColor4 }}" wire:navigate wire:navigate.hover>Services</a>
                         </li>
                     </ul>
                 </div>
@@ -53,6 +53,7 @@
         </nav>
     
     
+
     
         <main class="">
             {{ $slot }}        

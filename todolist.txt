@@ -24,7 +24,7 @@ Admin Dashboard
 
 Product Pages
     []---- create product management page: Add, edit, delete products
-    []---- create product listing page: display all products with search filter options
+    [0]---- create product listing page: display all products with search filter options
     []---- create product detail page: Show detailed information for individual products
 
 Shopping carts

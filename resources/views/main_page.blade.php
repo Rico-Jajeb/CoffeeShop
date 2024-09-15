@@ -33,17 +33,17 @@
         </div>
     </section>
 
-<main class="bg-gray-700 pb-10">
+<main class="bg-gray-700 pb-10 "  wire:init="loadPosts">
         <section class="mb-32 max-w-screen-2xl mx-auto ">
             <div class="flex items-center justify-center">
                 <h1 class="mt-20 mb-4 text-4xl font-extrabold leading-none tracking-tight text-[#F8E6DE] md:text-5xl lg:text-6xl dark:text-white">Top Products</h1>            
             </div>
-            <div class="flex justify-center gap-4 mt-28">
+            <div class="flex flex-wrap justify-center gap-4 mt-28" wire:init="loadPosts">
                 @foreach ($images as $image)
                     {{-- Products Cards --}}
                     <div class="w-80 h-[82]  max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
-                            <img class=" p-1 h-64 w-full m-auto rounded-lg" src="{{ asset('images/' . $image->product_image) }}" alt="{{ $image->product_name }}" />
+                            <img wire:init="loadPosts" class=" p-1 h-64 w-full m-auto rounded-lg" src="{{ asset('images/' . $image->product_image) }}" alt="{{ $image->product_name }}" />
                         </a>
                         <div class="px-5 pb-3">
                             <h5 class="mt-2 text-2xl font-bold tracking-tight text-[#ED500A] dark:text-[#ED500A]">₱ {{ $image->product_price }}</h5>

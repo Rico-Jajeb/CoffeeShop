@@ -37,8 +37,11 @@ Route::get('/Products',[AdminPanelControllers::class, 'products_page'] )->name('
 
 
 //THIS IS FOR THE UPLOADING OF IMAGES
-Route::get('/upload', [ProductsController::class, 'showUploadForm']);
+// Route::get('/upload', [ProductsController::class, 'showUploadForm']);
 Route::post('/upload', [ProductsController::class, 'uploadImage'])->name('image.upload');
+
+
+Route::post('/uploads', [ProductsController::class, 'uploadCategory'])->name('category.uploads');
 
 
 require __DIR__.'/auth.php';
