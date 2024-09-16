@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot:title> Products </x-slot:title>
-    <div class="py-12">
+    <div class="py-12 ">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-[#0B0E14] overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 flex justify-between">
                     {{ __("You're in items!") }}
                     <!-- Modal toggle -->
@@ -10,8 +10,149 @@
                         add Products
                     </button>                    
                 </div>
-                <div class=" flex flex-wrap justify-center gap-2">
+
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-3 bg-white mx-2">
+                    <div class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
+                        <div>
+                            <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                                <span class="sr-only">Action button</span>
+                                Action
+                                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Activate account</a>
+                                    </li>
+                                </ul>
+                                <div class="py-1">
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete User</a>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="table-search" class="sr-only">Search</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                </svg>
+                            </div>
+                            <input type="text" id="table-search-users" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
+                        </div>
+                    </div>
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                           
+                                <th scope="col" class="w-6 p-4 ">
+                                    <div class="flex items-center">
+                                        <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="checkbox-all-search" class="sr-only">checkbox</label>
+                                        <span>&nbsp; No.</span>
+                                    </div>
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Product Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Description
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Price
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Cost Price
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                // Get the current page number and the per-page limit from the paginator
+                                $currentPage = $products->currentPage();
+                                $perPage = $products->perPage();
+                                // Start numbering based on the page number
+                                $counter = ($currentPage - 1) * $perPage + 1;
+                            @endphp
+
+                            @foreach ($products as $image) 
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        
+                                        <td class="w-6 p-4">
+                                            <div class="flex items-center w-12">
+                                                 
+                                                <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="checkbox-table-search-1" class="sr-only">checkbox </label>
+                                               <span>&nbsp; {{ $counter++ }}.</span>
+                                            </div>
+                                            
+                                        </td>
+                                        <th scope="row" class=" px-6 py-4 w-48 text-gray-900  dark:text-white">
+                                            <div class=" w-48 flex items-center whitespace-nowrap">
+                                                <img class="w-10 h-10 rounded-full" src="{{ asset('images/' . $image->product_image) }}" alt="{{ $image->product_name }}">
+                                                <div class="ps-3">
+                                                    <div class="text-base text-[#ED500A] font-semibold">{{$image->product_name}}</div>
+                                                    <div class="font-normal text-xs text-gray-400">{{$image->updated_at}}</div>
+                                                </div>                                             
+                                            </div>
+                                        </th>
+                                        <td class="px-6 py-4 w-60">
+                                            <div class="overflow-x-auto  w-60 "> {{$image->product_description}}</div>
+                                            
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            ₱ {{$image->product_price}}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            ₱ {{$image->product_cost_price}}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center">
+                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                                        </td>
+                                    </tr>
+                            @endforeach
+                          
+                        </tbody>
+                    </table>
+                    <div class="mt-5">
+                         {{ $products->links() }}
+                    </div>
+ 
+
+                </div>
                 
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class=" flex flex-wrap justify-center gap-2">
                     @foreach ($products as $image)
                         @if ( $image->product_category == $category  )
                             {{-- Products Cards --}}

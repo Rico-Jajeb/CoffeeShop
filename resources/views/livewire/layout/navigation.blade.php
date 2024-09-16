@@ -41,7 +41,7 @@ new class extends Component
                 </div> --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('products_category_page')" :active="request()->routeIs('products_category_page')" >
-                        {{ __('Categories') }}
+                        {{ __('Products') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -102,7 +102,7 @@ new class extends Component
         </div> --}}
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('products_category_page')" :active="request()->routeIs('products_category_page')" >
-                {{ __('Categories') }}
+                {{ __('Products') }}
             </x-responsive-nav-link>
         </div>
 

@@ -6,29 +6,29 @@
     <nav class="flex max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
           <li class="inline-flex items-center">
-            <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+            <a href="{{ route('dashboard')}}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
               <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
               </svg>
               Admin
             </a>
           </li>
-          <li>
+          {{-- <li>
             <div class="flex items-center">
               <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
               </svg>
-              <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Products</a>
-            </div>
-          </li>
-          {{-- <li aria-current="page">
-            <div class="flex items-center">
-              <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-              </svg>
-              <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Flowbite</span>
+              <a href="{{ route('products_category_page') }}" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Products</a>
             </div>
           </li> --}}
+          <li aria-current="page">
+            <div class="flex items-center">
+              <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+              </svg>
+              <a href="{{ route('products_category_page') }}" class="ms-1 text-sm font-medium text-gray-500 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white" >Category</a>
+            </div>
+          </li>
         </ol>
       </nav>
       
@@ -45,8 +45,11 @@
                     @foreach ( $product_category as $category )
                         {{-- Category Cards --}}
                         <div class="w-80 h-[82]  max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="{{ route('products_page', ['category'=> $category->category_name] ) }}"  >
-                                <img wire:init="loadPosts" class=" p-1 h-64 w-full m-auto rounded-lg" src="{{ asset('images/' . $category->category_image) }}" alt="{{ $category->category_name }}" />
+                            <a href="{{ route('products_page', ['category'=> $category->category_name] ) }}" class="relative">
+                                <img wire:init="loadPosts" class="hover:blur-sm p-1 h-64 w-full m-auto rounded-lg transition-all duration-300" src="{{ asset('images/' . $category->category_image) }}" alt="{{ $category->category_name }}" />
+                                <div class="rounded-lg m-1 absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-semibold opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                    Click to view Products!
+                                </div>
                             </a>
                             <div class="px-5 pb-3 flex justify-center">
                                 <h5 class="mt-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-[#ED500A] truncate  w-53">{{ $category->category_name }}</h5>
