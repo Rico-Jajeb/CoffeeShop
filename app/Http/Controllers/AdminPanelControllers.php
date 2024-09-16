@@ -5,23 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Models\products;
+use App\Models\product_category;
 
 class AdminPanelControllers extends Controller
 {
-    // public function products_page()
-    // {
-    //     return view('admin_panel/products/products');
-    // }
 
+  
 
-    public function products_page()
+    public function products_page($category)
     {
-        $products = products::all(); //get all the data on images table
-        return view('admin_panel/products/products', compact('products'));
+        // Filter products by the selected category
+        $filteredProducts = products::where('category', $category)->get();
+    
+        // Get all products (if you still need to display all products somewhere on the page)
+        $products = products::all();
+
+        $product_category = product_category::all(); //get all the data on images table
+    
+        // Pass both the filtered products, all products, and the category to the view
+        return view('admin_panel/products/products', compact('filteredProducts', 'products', 'category','product_category' ));
     }
-    // public function products_page()
-    // {
-    //     $images = Image::all(); //get all the data on images table
-    //     return view('admin_panel/products/products', compact('images'));
-    // }
+    
+
+    public function products_category_page()
+    {
+        $product_category = product_category::all(); //get all the data on images table
+        return view('admin_panel/products/product_category', compact('product_category'));
+    }
+ 
 }

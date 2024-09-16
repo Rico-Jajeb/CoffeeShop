@@ -39,7 +39,7 @@
                 <h1 class="mt-20 mb-4 text-4xl font-extrabold leading-none tracking-tight text-[#F8E6DE] md:text-5xl lg:text-6xl dark:text-white">Top Products</h1>            
             </div>
             <div class="flex flex-wrap justify-center gap-4 mt-28" wire:init="loadPosts">
-                @foreach ($images as $image)
+                @foreach ($products as $image)
                     {{-- Products Cards --}}
                     <div class="w-80 h-[82]  max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">

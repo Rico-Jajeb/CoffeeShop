@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Image;
+use App\Models\products;
 
 class MainController extends Controller
 {
     public function main_page(){
-        $images = Image::all(); //get all the data on images table
-        return view('main_page', compact('images'));
+        $products = products::all(); //get all the data on images table
+        return view('main_page', compact('products'));
     }
 
     public function blogs_page(){

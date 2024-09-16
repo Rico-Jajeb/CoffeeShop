@@ -33,7 +33,9 @@ Route::get('/Blogs',[MainController::class, 'blogs_page'] )->name('blogs_page');
 Route::get('/Contact_us',[MainController::class, 'contact_us_page'] )->name('contact_us_page');
 Route::get('/Services',[MainController::class, 'services_page'] )->name('services_page');
 
-Route::get('/Products',[AdminPanelControllers::class, 'products_page'] )->name('products_page');
+// Route::get('/Products',[AdminPanelControllers::class, 'products_page'] )->name('products_page');
+Route::get('/Products/{category}',[AdminPanelControllers::class, 'products_page'] )->name('products_page');
+Route::get('/Product_category',[AdminPanelControllers::class, 'products_category_page'] )->name('products_category_page');
 
 
 //THIS IS FOR THE UPLOADING OF IMAGES
