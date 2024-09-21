@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AdminPanelControllers;
 use App\Http\Controllers\AdminPanel\products\ProductsController;
+use App\Http\Controllers\AdminPanel\products\UpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,9 @@ Route::get('/Product_category',[AdminPanelControllers::class, 'products_category
 //THIS IS FOR THE UPLOADING OF IMAGES
 // Route::get('/upload', [ProductsController::class, 'showUploadForm']);
 Route::post('/upload', [ProductsController::class, 'uploadImage'])->name('image.upload');
+
+Route::post('/update', [UpdateController::class, 'update_products'])->name('image.update');
+
 
 
 Route::post('/uploads', [ProductsController::class, 'uploadCategory'])->name('category.uploads');
