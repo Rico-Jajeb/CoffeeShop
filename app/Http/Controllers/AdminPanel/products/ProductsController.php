@@ -5,6 +5,10 @@ namespace App\Http\Controllers\AdminPanel\products;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
+
 use Intervention\Image\Facades\Image;
 
 use App\Http\Requests\upload_product_req_valid;
@@ -16,7 +20,26 @@ use App\Models\product_category;
 class ProductsController extends Controller
 {
 
-    //--------------------------------------- INSERT ---------------------------------------//
+    //--------------------------------------- FOR PROCESSING THE IMAGE RESIZING ---------------------------------------//
+
+    protected function processProductImage($image, $loc)
+    {
+        $imageName = time() . '.' . $image->extension();
+    
+        // Resize and save the image
+        $imageResized = Image::make($image)
+            ->resize(320, 240, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })
+            ->save(public_path('images/'.$loc . $imageName), 80); // Adjust quality for smaller file size
+    
+        return $imageName;
+    }
+
+
+
+//--------------------------------------- INSERT ---------------------------------------//
 
     // Products
     public function uploadImage(Request $request)
@@ -98,26 +121,61 @@ class ProductsController extends Controller
 
 
 
+//--------------------------------------- UPDATE ---------------------------------------//
 
 
-
-
-    //--------------------------------------- FOR PROCESSING THE IMAGE RESIZING ---------------------------------------//
-
-    protected function processProductImage($image, $loc)
+    public function update_products(Request $request)
     {
-        $imageName = time() . '.' . $image->extension();
-    
-        // Resize and save the image
-        $imageResized = Image::make($image)
-            ->resize(320, 240, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })
-            ->save(public_path('images/'.$loc . $imageName), 80); // Adjust quality for smaller file size
-    
-        return $imageName;
+        // Increase memory limit to handle larger images (if absolutely necessary)
+        ini_set('memory_limit', '256M');
+
+        // Validate the request inputs before finding the product
+        $validated = $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120', // Allow up to 5MB images, optional
+            'product_name' => 'required|string|max:255',
+            'product_price' => 'required|integer|min:0|max:1000000',
+            'product_cost_price' => 'required|integer|min:0|max:1000000',
+            'product_description' => 'required|string|max:255',
+            'product_category' => 'required|string|max:255',
+        ]);
+
+        // Find the product
+        $product = products::findOrFail($request->input('product_id'));
+        // $product_imgg = products::findOrFail($request->input('product_id'));
+
+        $imgName = $product->product_image;
+
+        // Handle image processing in a separate method to clean up the main logic
+        if ($request->hasFile('image')) {
+            try {
+                $imageName = $this->processProductImage($request->file('image'), $loc='/product_img/');
+                $product->product_image = $imageName;
+            } catch (\Exception $e) {
+                // return back()->withErrors(['image' => 'Error processing the image: ' . $e->getMessage()]);
+                return back()->with('success', 'Error processing the image.');
+            }
+        }
+        // Update product details
+        $product->product_name = $request->input('product_name');
+        $product->product_price = $request->input('product_price');
+        $product->product_cost_price = $request->input('product_cost_price');
+        $product->product_description = $request->input('product_description');
+        $product->product_category = $request->input('product_category');
+        // Save the product changes
+        $product->save();
+
+       
+        $imagePath = public_path('images/product_img/'. $imgName); // Adjust the path as needed
+
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+            return back()->with('success', 'Product updated successfully.');
+        } 
+
+        // Return success response
+        return back()->with('success', 'Product updated successfully.');
     }
+
 
     // protected function processProductImage($image)
     // {
