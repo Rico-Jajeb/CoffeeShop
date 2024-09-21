@@ -37,7 +37,7 @@ class ProductsController extends Controller
         $imageName = time().'.'.$request->image->extension(); 
 
         try {
-            $imageName = $this->processProductImage($request->file('image'));
+            $imageName = $this->processProductImage($request->file('image'), $loc='/product_img/');
             $image->product_image = $imageName;
         } catch (\Exception $e) {
             return back()->with('error', 'error processing the image.');
@@ -54,6 +54,7 @@ class ProductsController extends Controller
         // Return success response
         return back()->with('success', 'You have successfully uploaded an image.');
     }
+
 
 
 
@@ -75,7 +76,7 @@ class ProductsController extends Controller
 
         try {
             //This use the process Image function
-            $imageName = $this->processProductImage($request->file('image'));
+            $imageName = $this->processProductImage($request->file('image'), $loc='/category_img/' );
             $cat->category_image = $imageName;
         } catch (\Exception $e) {
             return back()->with('error', 'error processing the image.');
@@ -103,7 +104,7 @@ class ProductsController extends Controller
 
     //--------------------------------------- FOR PROCESSING THE IMAGE RESIZING ---------------------------------------//
 
-    protected function processProductImage($image)
+    protected function processProductImage($image, $loc)
     {
         $imageName = time() . '.' . $image->extension();
     
@@ -113,20 +114,35 @@ class ProductsController extends Controller
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })
-            ->save(public_path('images/' . $imageName), 80); // Adjust quality for smaller file size
+            ->save(public_path('images/'.$loc . $imageName), 80); // Adjust quality for smaller file size
     
         return $imageName;
     }
 
-
-
-
-
-
-
-
-
+    // protected function processProductImage($image)
+    // {
+    //     $imageName = time() . '.' . $image->extension();
     
+    //     // Resize and save the image
+    //     $imageResized = Image::make($image)
+    //         ->resize(320, 240, function ($constraint) {
+    //             $constraint->aspectRatio();
+    //             $constraint->upsize();
+    //         })
+    //         ->save(public_path('images/' . $imageName), 80); // Adjust quality for smaller file size
+    
+    //     return $imageName;
+    // }
+
+
+
+
+
+
+
+
+
+
     // public function uploadCategory(Request $request)
     // {
     //     $request->validate([

@@ -103,7 +103,7 @@
                                         </td>
                                         <th scope="row" class=" px-6 py-4 w-48 text-gray-900  dark:text-white">
                                             <div class=" w-48 flex items-center whitespace-nowrap">
-                                                <img class="w-10 h-10 rounded-full" src="{{ asset('images/' . $image->product_image) }}" alt="{{ $image->product_name }}">
+                                                <img class="w-10 h-10 rounded-full" src="{{ asset('images/product_img/' . $image->product_image) }}" alt="{{ $image->product_name }}">
                                                 <div class="ps-3">
                                                     <div class="text-base text-[#ED500A] font-semibold">{{$image->product_name}}</div>
                                                     <div class="font-normal text-xs text-gray-400">{{$image->updated_at}}</div>
@@ -224,7 +224,7 @@
                             {{-- Products Cards --}}
                             <div class="w-80 h-[82]  max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                 <a href="#">
-                                    <img wire:init="loadPosts" class=" p-1 h-64 w-full m-auto rounded-lg" src="{{ asset('images/' . $image->product_image) }}" alt="{{ $image->product_name }}" />
+                                    <img wire:init="loadPosts" class=" p-1 h-64 w-full m-auto rounded-lg" src="{{ asset('images/product_img/' . $image->product_image) }}" alt="{{ $image->product_name }}" />
                                 </a>
                                 <div class="px-5 pb-3">
                                     <h5 class="mt-2 text-2xl font-bold tracking-tight text-[#ED500A] dark:text-[#ED500A]">₱ {{ $image->product_price }}{{ $image->product_category }}</h5>
