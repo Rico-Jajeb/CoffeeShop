@@ -32,7 +32,7 @@ class ProductsController extends Controller
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })
-            ->save(public_path('images/'.$loc . $imageName), 80); // Adjust quality for smaller file size
+            ->save(public_path('images/'.$loc . $imageName), 100); // Adjust quality for smaller file size
     
         return $imageName;
     }
@@ -126,12 +126,10 @@ class ProductsController extends Controller
 
     public function update_products(Request $request)
     {
-        // Increase memory limit to handle larger images (if absolutely necessary)
         ini_set('memory_limit', '256M');
 
-        // Validate the request inputs before finding the product
         $validated = $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120', // Allow up to 5MB images, optional
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240', // Allow up to 5MB images, optional
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|integer|min:0|max:1000000',
             'product_cost_price' => 'required|integer|min:0|max:1000000',
@@ -141,20 +139,19 @@ class ProductsController extends Controller
 
         // Find the product
         $product = products::findOrFail($request->input('product_id'));
-        // $product_imgg = products::findOrFail($request->input('product_id'));
-
+        //get the product_image name
         $imgName = $product->product_image;
 
-        // Handle image processing in a separate method to clean up the main logic
+        // Handle image processing 
         if ($request->hasFile('image')) {
             try {
                 $imageName = $this->processProductImage($request->file('image'), $loc='/product_img/');
                 $product->product_image = $imageName;
             } catch (\Exception $e) {
-                // return back()->withErrors(['image' => 'Error processing the image: ' . $e->getMessage()]);
-                return back()->with('success', 'Error processing the image.');
+                return redirect()->route('products_category_page');
             }
         }
+
         // Update product details
         $product->product_name = $request->input('product_name');
         $product->product_price = $request->input('product_price');
@@ -164,71 +161,27 @@ class ProductsController extends Controller
         // Save the product changes
         $product->save();
 
-       
-        $imagePath = public_path('images/product_img/'. $imgName); // Adjust the path as needed
-
-        if (File::exists($imagePath)) {
-            File::delete($imagePath);
-            return back()->with('success', 'Product updated successfully.');
-        } 
+        if ($request->hasFile('image')) {
+            //This is for deleting the old image
+            $imagePath = public_path('images/product_img/'. $imgName); // Adjust the path as needed
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+                return back()->with('success', $product->product_name);
+            } 
+        }
 
         // Return success response
-        return back()->with('success', 'Product updated successfully.');
+        return back()->with('success', $product->product_name);
     }
 
 
-    // protected function processProductImage($image)
-    // {
-    //     $imageName = time() . '.' . $image->extension();
-    
-    //     // Resize and save the image
-    //     $imageResized = Image::make($image)
-    //         ->resize(320, 240, function ($constraint) {
-    //             $constraint->aspectRatio();
-    //             $constraint->upsize();
-    //         })
-    //         ->save(public_path('images/' . $imageName), 80); // Adjust quality for smaller file size
-    
-    //     return $imageName;
-    // }
+ 
 
 
 
 
 
 
-
-
-
-
-    // public function uploadCategory(Request $request)
-    // {
-    //     $request->validate([
-    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //         'category_name' => 'required|string|max:255',
-    //         'category_description' => 'required|string|max:255',
-    //         'category_active' => 'required|string|max:255',
-    //     ]);
-    
-    //     // Generate a unique image name
-    //     $imageName = time().'.'.$request->image->extension();
-    
-    //     // Resize the image using Intervention Image
-    //     $image = Image::make($request->file('image'))->resize(320, 240);
-    
-    //     // Save the resized image to the public/images folder
-    //     $image->save(public_path('images/' . $imageName));
-    
-    //     // Create a new product category and save it in the database
-    //     $cat = new product_category;
-    //     $cat->category_image = $imageName;
-    //     $cat->category_name = $request->category_name; 
-    //     $cat->category_description = $request->category_description;
-    //     $cat->category_active = $request->category_active;
-    //     $cat->save();
-    
-    //     return back()->with('success', 'You have successfully uploaded and resized the image.');
-    // }
 
 
 }
