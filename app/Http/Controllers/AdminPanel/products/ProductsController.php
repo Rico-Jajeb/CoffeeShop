@@ -42,15 +42,15 @@ class ProductsController extends Controller
 //--------------------------------------- INSERT ---------------------------------------//
 
     // Products
-    public function uploadImage(Request $request)
+    public function add_products(Request $request)
     {
         ini_set('memory_limit', '256M');
 
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240', // Allow up to 5MB images
             'product_name' => 'required|string|max:255',
-            'product_price' => 'required|integer|max:255',
-            'product_cost_price' => 'required|integer|max:255',
+            'product_price' => 'required|integer|min:0|max:1000000',
+            'product_cost_price' => 'required|integer|min:0|max:1000000',
             'product_description' => 'required|string|max:255',
             'product_category' => 'required|string|max:255',
         ]);
@@ -75,7 +75,7 @@ class ProductsController extends Controller
         $image->save();
 
         // Return success response
-        return back()->with('success', 'You have successfully uploaded an image.');
+        return back()->with('success', 'New Product: '. $request->input('product_name').  ' added successfully!');
     }
 
 
@@ -166,20 +166,38 @@ class ProductsController extends Controller
             $imagePath = public_path('images/product_img/'. $imgName); // Adjust the path as needed
             if (File::exists($imagePath)) {
                 File::delete($imagePath);
-                return back()->with('success', $product->product_name);
+                return back()->with('success', 'Update Product: '. $product->product_name . ' Successfully!');
             } 
         }
 
         // Return success response
-        return back()->with('success', $product->product_name);
+        return back()->with('success', 'Update Product: '. $product->product_name . ' Successfully!');
     }
 
 
  
+//--------------------------------------- DELETE ---------------------------------------//
 
 
+    public function delete_data($id)
+    {
+      
+        $del_data = products::find($id);
 
+        $imgName = $del_data->product_image;
+        $product_name = $del_data->product_name;
 
+        $imagePath = public_path('images/product_img/'. $imgName); // Adjust the path as needed
+        if (File::exists($imagePath)) {
+                File::delete($imagePath);
+                 $del_data->delete();
+                return back()->with('success','Delete Product: '. $product_name. ' Successfully');
+        } 
+
+        $del_data->delete();
+
+        return back()->with('success','Delete Product: '. $product_name. ' Successfully');
+    }
 
 
 

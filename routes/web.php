@@ -41,10 +41,12 @@ Route::get('/Product_category',[AdminPanelControllers::class, 'products_category
 
 //THIS IS FOR THE UPLOADING OF IMAGES
 // Route::get('/upload', [ProductsController::class, 'showUploadForm']);
-Route::post('/upload', [ProductsController::class, 'uploadImage'])->name('image.upload');
+Route::post('/upload', [ProductsController::class, 'add_products'])->name('image.upload');
 
 Route::post('/update', [ProductsController::class, 'update_products'])->name('image.update');
 
+
+Route::delete('delete/{id}', [ProductsController::class, 'delete_data'])->name('delete.products');
 
 
 Route::post('/uploads', [ProductsController::class, 'uploadCategory'])->name('category.uploads');

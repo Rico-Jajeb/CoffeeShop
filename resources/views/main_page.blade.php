@@ -43,7 +43,7 @@
                     {{-- Products Cards --}}
                     <div class="w-80 h-[82]  max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
-                            <img wire:init="loadPosts" class=" p-1 h-64 w-full m-auto rounded-lg" src="{{ asset('images/' . $image->product_image) }}" alt="{{ $image->product_name }}" />
+                            <img wire:init="loadPosts" class=" p-1 h-64 w-full m-auto rounded-lg" src="{{ asset('images/product_img/' . $image->product_image) }}" alt="{{ $image->product_name }}" />
                         </a>
                         <div class="px-5 pb-3">
                             <h5 class="mt-2 text-2xl font-bold tracking-tight text-[#ED500A] dark:text-[#ED500A]">₱ {{ $image->product_price }}</h5>
