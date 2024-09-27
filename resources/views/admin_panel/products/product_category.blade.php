@@ -45,7 +45,7 @@
                     @foreach ( $product_category as $category )
                         {{-- Category Cards --}}
                         <div class="w-80 h-[82]  max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="{{ route('products_page', ['category'=> $category->category_name] ) }}" class="relative">
+                            <a href="{{ route('products_page', ['category'=> $category->category_name] ) }}" class="relative" >
                                 <img wire:init="loadPosts" class="hover:blur-sm p-1 h-64 w-full m-auto rounded-lg transition-all duration-300" src="{{ asset('images/category_img/' . $category->category_image) }}" alt="{{ $category->category_name }}" />
                                 <div class="rounded-lg m-1 absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-semibold opacity-0 hover:opacity-100 transition-opacity duration-300">
                                     Click to view Products!
@@ -110,5 +110,4 @@
             </div>
         </div>
     </div> 
-
-</x-app-layout>
+ </x-app-layout>

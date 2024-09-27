@@ -23,7 +23,7 @@ Admin Dashboard
     []---- Create sales tracking page: view and filter sales report
 
 Product Pages
-    []---- create product management page: Add, edit, delete products
+    [/]---- create product management page: Add, edit, delete products
     [0]---- create product listing page: display all products with search filter options
     [/]---- create product detail page: Show detailed information for individual products
 

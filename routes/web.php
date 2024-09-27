@@ -29,27 +29,22 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+//------------------ USER PAGE LINKS ------------------//
 Route::get('/Home',[MainController::class, 'main_page'] )->name('main_page');
 Route::get('/Blogs',[MainController::class, 'blogs_page'] )->name('blogs_page');
 Route::get('/Contact_us',[MainController::class, 'contact_us_page'] )->name('contact_us_page');
 Route::get('/Services',[MainController::class, 'services_page'] )->name('services_page');
 
-// Route::get('/Products',[AdminPanelControllers::class, 'products_page'] )->name('products_page');
+
+//------------------ PRODUCTS LINKS ------------------//
 Route::get('/Products/{category}',[AdminPanelControllers::class, 'products_page'] )->name('products_page');
 Route::get('/Product_category',[AdminPanelControllers::class, 'products_category_page'] )->name('products_category_page');
 
-
-//THIS IS FOR THE UPLOADING OF IMAGES
-// Route::get('/upload', [ProductsController::class, 'showUploadForm']);
 Route::post('/upload', [ProductsController::class, 'add_products'])->name('image.upload');
-
 Route::post('/update', [ProductsController::class, 'update_products'])->name('image.update');
-
+Route::post('/uploads', [ProductsController::class, 'uploadCategory'])->name('category.uploads');
 
 Route::delete('delete/{id}', [ProductsController::class, 'delete_data'])->name('delete.products');
-
-
-Route::post('/uploads', [ProductsController::class, 'uploadCategory'])->name('category.uploads');
 
 
 require __DIR__.'/auth.php';
