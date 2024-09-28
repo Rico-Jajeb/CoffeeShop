@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AdminPanelControllers;
 use App\Http\Controllers\AdminPanel\products\ProductsController;
-use App\Http\Controllers\AdminPanel\products\UpdateController;
+
+use App\Http\Controllers\AdminPanel\products\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,5 +47,7 @@ Route::post('/uploads', [ProductsController::class, 'uploadCategory'])->name('ca
 
 Route::delete('delete/{id}', [ProductsController::class, 'delete_data'])->name('delete.products');
 
+//------------------ SHOPPING CARTS LINKS ------------------//
+Route::post('/Shopping_Cart', [CartController::class, 'add_to_cart' ] )->name('add_to_cart');
 
 require __DIR__.'/auth.php';

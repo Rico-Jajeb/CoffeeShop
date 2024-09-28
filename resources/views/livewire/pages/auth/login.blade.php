@@ -21,7 +21,9 @@ new #[Layout('layouts.guest')] class extends Component
 
         Session::regenerate();
 
-        $this->redirectIntended(default: RouteServiceProvider::HOME, navigate: true);
+        // $this->redirectIntended(default: RouteServiceProvider::HOME, navigate: true); //this is the one responsible for the redirect after the login
+        $this->redirectIntended(default: '/Home', navigate: true);
+
     }
 }; ?>
 
