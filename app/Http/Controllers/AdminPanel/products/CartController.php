@@ -27,4 +27,9 @@ class CartController extends Controller
 
         return back()->with('success', 'Cart success');
     }
+
+    public function shopping_cart()
+    {
+        return view('layouts/cart/shopping_cart');
+    }
 }

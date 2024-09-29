@@ -8,6 +8,9 @@ use App\Http\Controllers\AdminPanel\products\ProductsController;
 
 use App\Http\Controllers\AdminPanel\products\CartController;
 
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +41,8 @@ Route::get('/Services',[MainController::class, 'services_page'] )->name('service
 
 
 //------------------ PRODUCTS LINKS ------------------//
+
+
 Route::get('/Products/{category}',[AdminPanelControllers::class, 'products_page'] )->name('products_page');
 Route::get('/Product_category',[AdminPanelControllers::class, 'products_category_page'] )->name('products_category_page');
 
@@ -49,5 +54,8 @@ Route::delete('delete/{id}', [ProductsController::class, 'delete_data'])->name('
 
 //------------------ SHOPPING CARTS LINKS ------------------//
 Route::post('/Shopping_Cart', [CartController::class, 'add_to_cart' ] )->name('add_to_cart');
+
+Route::get('/Shopping-cart', [CartController::class, 'shopping_cart'])->name('shopping_cart_page');
+
 
 require __DIR__.'/auth.php';

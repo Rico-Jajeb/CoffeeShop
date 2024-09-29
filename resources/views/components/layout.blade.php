@@ -48,6 +48,7 @@
                     @if (Route::has('login'))
                         <livewire:welcome.navigation />
                     @endif
+                
             </div>
             </section>
         </nav>
