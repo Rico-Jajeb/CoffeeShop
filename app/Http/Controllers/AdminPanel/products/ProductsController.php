@@ -51,6 +51,7 @@ class ProductsController extends Controller
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|integer|min:0|max:1000000',
             'product_cost_price' => 'required|integer|min:0|max:1000000',
+            'product_quantity' => 'required|integer|min:0|max:1000000',
             'product_description' => 'required|string|max:255',
             'product_category' => 'required|string|max:255',
         ]);
@@ -70,6 +71,7 @@ class ProductsController extends Controller
         $image->product_name = $request->input('product_name');
         $image->product_price = $request->input('product_price');
         $image->product_cost_price = $request->input('product_cost_price');
+        $image->product_quantity = $request->input('product_quantity');
         $image->product_description = $request->input('product_description');
         $image->product_category = $request->input('product_category');
         $image->save();

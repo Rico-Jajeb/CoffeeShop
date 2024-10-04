@@ -32,4 +32,12 @@ class CartController extends Controller
     {
         return view('layouts/cart/shopping_cart');
     }
+
+    public function delete_cart($id)
+    {
+        $del_cart = shopping_cart::find($id);
+        $del_cart -> delete();
+
+        return back()->with('succes', 'Deleted successfully ');
+    }
 }

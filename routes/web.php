@@ -57,5 +57,7 @@ Route::post('/Shopping_Cart', [CartController::class, 'add_to_cart' ] )->name('a
 
 Route::get('/Shopping-cart', [CartController::class, 'shopping_cart'])->name('shopping_cart_page');
 
+Route::delete('/Delete-cart/{id}', [CartController::class, 'delete_cart'])->name('delete_cart');
+
 
 require __DIR__.'/auth.php';
